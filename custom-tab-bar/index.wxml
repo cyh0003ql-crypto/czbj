@@ -1,0 +1,29 @@
+<view class="tab-bar">
+  <view class="tab-bar-border"></view>
+  <view
+    class="tab-bar-item {{item.isCenter ? 'tab-center' : ''}} {{selected === index ? 'selected' : ''}}"
+    wx:for="{{list}}"
+    wx:key="pagePath"
+    data-index="{{index}}"
+    data-path="{{item.pagePath}}"
+    bindtap="switchTab"
+  >
+    <!-- 中间定制按钮 -->
+    <view wx:if="{{item.isCenter}}" class="center-btn">
+      <text class="center-plus">+</text>
+    </view>
+
+    <!-- 普通图标 -->
+    <block wx:else>
+      <!-- 购物车带角标 -->
+      <view class="icon-wrap" wx:if="{{item.text === '购物车'}}">
+        <text class="tab-icon">{{selected === index ? item.iconSelected : item.icon}}</text>
+        <view class="cart-badge" wx:if="{{cartCount > 0}}">
+          <text>{{cartCount > 99 ? '99+' : cartCount}}</text>
+        </view>
+      </view>
+      <text wx:else class="tab-icon {{selected === index ? 'tab-icon-selected' : ''}}">{{selected === index ? item.iconSelected : item.icon}}</text>
+      <text class="tab-text {{selected === index ? 'tab-text-selected' : ''}}">{{item.text}}</text>
+    </block>
+  </view>
+</view>

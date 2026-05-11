@@ -1,0 +1,28 @@
+<view class="wishlist-page">
+  <view class="empty-state" wx:if="{{!items.length}}">
+    <text class="empty-icon">♡</text>
+    <text>还没有收藏的商品</text>
+    <view class="go-btn btn-primary" bindtap="goShopping">去逛逛</view>
+  </view>
+
+  <view class="product-grid" wx:else>
+    <view class="product-card card" wx:for="{{items}}" wx:key="id" bindtap="goProductDetail" data-id="{{item.id}}">
+      <view class="img-wrap">
+        <image class="prod-img" src="{{item.image}}" mode="aspectFill" lazy-load="{{true}}"></image>
+        <view class="unwish-btn" catchtap="removeWishlist" data-id="{{item.id}}">♥</view>
+      </view>
+      <view class="prod-info">
+        <text class="prod-name">{{item.name}}</text>
+        <view class="prod-tags">
+          <text class="tag" wx:for="{{item.tags}}" wx:key="*this" wx:for-item="t">{{t}}</text>
+        </view>
+        <view class="prod-bottom">
+          <view class="prod-price">
+            <text class="pu">¥</text><text class="pn">{{item.price}}</text><text class="ps"> 起</text>
+          </view>
+          <view class="cart-btn" catchtap="addToCart" data-id="{{item.id}}">🛒</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

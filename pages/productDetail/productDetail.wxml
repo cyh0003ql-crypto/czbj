@@ -1,0 +1,209 @@
+<view class="detail-page">
+  <!-- 顶部操作栏 -->
+  <view class="detail-nav" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-back" bindtap="goBack">‹</view>
+    <text class="nav-title">Artful Living</text>
+    <view class="nav-actions">
+      <text class="nav-action-btn" bindtap="onShare">⬆</text>
+      <text class="nav-action-btn {{isWished ? 'wished' : ''}}" bindtap="onWishlist">{{isWished ? '♥' : '♡'}}</text>
+    </view>
+  </view>
+
+  <!-- 图片轮播 -->
+  <view class="image-swiper-wrap">
+    <swiper class="image-swiper" circular="{{true}}" autoplay="{{true}}" interval="{{3000}}" bindchange="onSwiperChange">
+      <swiper-item wx:for="{{product.images}}" wx:key="*this">
+        <image class="swiper-img" src="{{item}}" mode="aspectFill"></image>
+      </swiper-item>
+    </swiper>
+    <view class="swiper-dots">
+      <view class="dot {{currentImageIndex === index ? 'dot-active' : ''}}" wx:for="{{product.images}}" wx:key="*this"></view>
+    </view>
+  </view>
+
+  <!-- 价格与名称 -->
+  <view class="product-summary card">
+    <view class="summary-price">
+      <text class="price-unit">¥</text>
+      <text class="price-big">{{product.price}}</text>
+      <text class="price-start">起</text>
+      <text class="price-original" wx:if="{{product.originalPrice}}">¥{{product.originalPrice}}</text>
+    </view>
+    <text class="summary-name">{{product.name}}</text>
+    <view class="summary-tags">
+      <text class="tag" wx:for="{{product.tags}}" wx:key="*this" wx:for-item="tag">{{tag}}</text>
+    </view>
+
+    <view class="divider" style="margin: 20rpx 0;"></view>
+
+    <!-- 当前已选规格 -->
+    <view class="info-row" bindtap="openSpecPanel">
+      <text class="info-label">选择规格</text>
+      <view class="info-right">
+        <text class="info-value {{selectedSpec ? '' : 'info-placeholder'}}">{{selectedSpec || '请选择尺寸/颜色/材质'}}</text>
+        <text class="info-arrow">›</text>
+      </view>
+    </view>
+    <view class="divider" style="margin: 0;"></view>
+    <view class="info-row">
+      <text class="info-label">发货时间</text>
+      <view class="info-right">
+        <text class="info-value">现货3天内 · 定制3-7天</text>
+      </view>
+    </view>
+    <view class="divider" style="margin: 0;"></view>
+    <view class="info-row">
+      <text class="info-label">保障服务</text>
+      <view class="info-right">
+        <text class="info-value">7天无理由退换 · 品质保证</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Tab 标签页 -->
+  <view class="tab-section card">
+    <view class="tab-bar-wrap">
+      <view class="tab-item {{activeTab === 0 ? 'active' : ''}}" bindtap="onTabTap" data-index="{{0}}">商品详情</view>
+      <view class="tab-item {{activeTab === 1 ? 'active' : ''}}" bindtap="onTabTap" data-index="{{1}}">规格参数</view>
+      <view class="tab-item {{activeTab === 2 ? 'active' : ''}}" bindtap="onTabTap" data-index="{{2}}">定制流程</view>
+      <view class="tab-item {{activeTab === 3 ? 'active' : ''}}" bindtap="onTabTap" data-index="{{3}}">用户评价({{reviews.length}})</view>
+    </view>
+
+    <view class="tab-content" wx:if="{{activeTab === 0}}">
+      <view class="detail-images">
+        <image class="detail-img" wx:for="{{product.detailImages}}" wx:key="*this" src="{{item}}" mode="widthFix" lazy-load="{{true}}"></image>
+      </view>
+      <view class="detail-text">{{product.description}}</view>
+    </view>
+
+    <view class="tab-content" wx:if="{{activeTab === 1}}">
+      <view class="spec-table-row {{index % 2 === 0 ? 'spec-even' : ''}}" wx:for="{{product.specs}}" wx:key="label">
+        <text class="spec-label">{{item.label}}</text>
+        <text class="spec-value">{{item.value}}</text>
+      </view>
+    </view>
+
+    <view class="tab-content" wx:if="{{activeTab === 2}}">
+      <view class="process-header">
+        <text class="process-icon-big">✨</text>
+        <view>
+          <text class="process-title">专属定制流程</text>
+          <text class="process-sub">简单4步，轻松实现你的创意</text>
+        </view>
+      </view>
+      <view class="process-steps">
+        <view class="process-step" wx:for="{{customSteps}}" wx:key="step">
+          <view class="step-circle">
+            <text class="step-circle-icon">{{item.icon}}</text>
+          </view>
+          <view class="step-content">
+            <text class="step-title">{{item.step}}. {{item.title}}</text>
+            <text class="step-desc">{{item.desc}}</text>
+          </view>
+          <view class="step-connector" wx:if="{{index < customSteps.length - 1}}"></view>
+        </view>
+      </view>
+      <view class="service-tip" bindtap="contactService">
+        <text class="tip-icon">🎧</text>
+        <text class="tip-text">如有疑问，点击联系客服咨询 ›</text>
+      </view>
+    </view>
+
+    <view class="tab-content" wx:if="{{activeTab === 3}}">
+      <view class="review-summary">
+        <text class="rating-big">5.0</text>
+        <view class="stars">⭐⭐⭐⭐⭐</view>
+        <text class="review-total">共{{reviews.length}}条评价</text>
+      </view>
+      <view class="review-item" wx:for="{{reviews}}" wx:key="id">
+        <view class="review-header">
+          <image class="reviewer-avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+          <view class="reviewer-info">
+            <text class="reviewer-name">{{item.name}}</text>
+            <text class="reviewer-spec">{{item.spec}}</text>
+          </view>
+          <text class="review-date">{{item.date}}</text>
+        </view>
+        <text class="review-stars">⭐⭐⭐⭐⭐</text>
+        <text class="review-text">{{item.content}}</text>
+        <view class="review-images" wx:if="{{item.images && item.images.length}}">
+          <image class="review-img" wx:for="{{item.images}}" wx:key="*this" wx:for-item="ri" src="{{ri}}" mode="aspectFill"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view style="height: 160rpx;"></view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="bottom-btns">
+      <view class="btn-secondary add-cart-btn" bindtap="addToCart">加入购物车</view>
+      <view class="btn-primary buy-btn" bindtap="buyNow">立即购买</view>
+    </view>
+  </view>
+
+  <!-- 规格选择弹窗 -->
+  <view class="spec-mask {{showSpecPanel ? 'show' : ''}}" bindtap="closeSpecPanel"></view>
+  <view class="spec-panel {{showSpecPanel ? 'panel-show' : ''}}">
+    <view class="spec-panel-header">
+      <image class="spec-preview-img" src="{{product.images[0]}}" mode="aspectFill"></image>
+      <view class="spec-panel-info">
+        <text class="spec-panel-price">¥{{selectedSpecPrice || product.price}} <text class="spp-unit">起</text></text>
+        <text class="spec-panel-selected">已选：{{selectedSpec || '请选择规格'}}</text>
+        <view class="spec-stock">库存 {{selectedSpecStock || '--'}} 件</view>
+      </view>
+      <view class="spec-close" bindtap="closeSpecPanel">✕</view>
+    </view>
+
+    <!-- 颜色选择 -->
+    <view class="spec-group">
+      <text class="spec-group-label">颜色</text>
+      <view class="spec-options">
+        <view
+          class="spec-option {{selectedColor === item.value ? 'selected' : ''}} {{item.stock === 0 ? 'sold-out' : ''}}"
+          wx:for="{{colorOptions}}"
+          wx:key="value"
+          bindtap="onSelectColor"
+          data-value="{{item.value}}"
+          data-price="{{item.price}}"
+        >
+          <view class="color-dot" style="background: {{item.hex}};"></view>
+          {{item.label}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 尺寸选择 -->
+    <view class="spec-group">
+      <text class="spec-group-label">尺寸</text>
+      <view class="spec-options">
+        <view
+          class="spec-option {{selectedSize === item.value ? 'selected' : ''}} {{item.stock === 0 ? 'sold-out' : ''}}"
+          wx:for="{{sizeOptions}}"
+          wx:key="value"
+          bindtap="onSelectSize"
+          data-value="{{item.value}}"
+        >
+          {{item.label}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 数量 -->
+    <view class="qty-section">
+      <text class="qty-label">数量</text>
+      <view class="qty-control">
+        <view class="qty-btn {{quantity <= 1 ? 'qty-disabled' : ''}}" bindtap="decreaseQty">－</view>
+        <text class="qty-num">{{quantity}}</text>
+        <view class="qty-btn" bindtap="increaseQty">＋</view>
+      </view>
+    </view>
+
+    <view class="spec-actions">
+      <view class="spec-cart-btn" bindtap="confirmAddToCart">加入购物车</view>
+      <view class="spec-buy-btn" bindtap="confirmBuyNow">立即购买</view>
+    </view>
+    <view style="height: env(safe-area-inset-bottom);"></view>
+  </view>
+</view>

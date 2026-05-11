@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/category/category",
+    "pages/customize/customize",
+    "pages/cart/cart",
+    "pages/mine/mine",
+    "pages/productDetail/productDetail",
+    "pages/merchant/merchant",
+    "pages/search/search",
+    "pages/orderList/orderList",
+    "pages/address/address",
+    "pages/wishlist/wishlist",
+    "pages/coupon/coupon",
+    "pages/merchant/productEdit/productEdit",
+    "pages/merchant/orderDetail/orderDetail",
+    "pages/merchant/customOrders/customOrders"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#faf8f5",
+    "navigationBarTitleText": "Artful Living",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f5f0eb"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#999999",
+    "selectedColor": "#3d2a1e",
+    "backgroundColor": "#faf8f5",
+    "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/home/home", "text": "首页" },
+      { "pagePath": "pages/category/category", "text": "分类" },
+      { "pagePath": "pages/customize/customize", "text": "定制" },
+      { "pagePath": "pages/cart/cart", "text": "购物车" },
+      { "pagePath": "pages/mine/mine", "text": "我的" }
+    ]
+  },
+  "cloud": true,
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}

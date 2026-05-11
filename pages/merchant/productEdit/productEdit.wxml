@@ -1,0 +1,83 @@
+<view class="product-edit-page">
+  <view class="form-section card">
+    <text class="section-label">基本信息</text>
+
+    <view class="form-item">
+      <text class="fl">商品名称</text>
+      <input class="fi" placeholder="请输入商品名称" value="{{form.name}}" bindinput="onInput" data-key="name" />
+    </view>
+    <view class="form-item">
+      <text class="fl">商品分类</text>
+      <picker range="{{categories}}" range-key="name" value="{{form.categoryIndex}}" bindchange="onCategoryChange">
+        <view class="picker-val">
+          {{categories[form.categoryIndex].name}} <text class="arr">›</text>
+        </view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="fl">起售价格</text>
+      <input class="fi" placeholder="¥ 0.00" type="digit" value="{{form.price}}" bindinput="onInput" data-key="price" />
+    </view>
+    <view class="form-item">
+      <text class="fl">发货时间</text>
+      <input class="fi" placeholder="如：现货3天内/定制3-7天" value="{{form.shippingTime}}" bindinput="onInput" data-key="shippingTime" />
+    </view>
+    <view class="form-item toggle-item">
+      <text class="fl">支持定制</text>
+      <switch checked="{{form.customizable}}" bindchange="onToggle" data-key="customizable" color="#3d2a1e" />
+    </view>
+    <view class="form-item toggle-item">
+      <text class="fl">推荐展示</text>
+      <switch checked="{{form.featured}}" bindchange="onToggle" data-key="featured" color="#3d2a1e" />
+    </view>
+  </view>
+
+  <view class="form-section card">
+    <text class="section-label">商品标签</text>
+    <view class="tag-input-row">
+      <input class="tag-input" placeholder="输入标签，如：可定制" value="{{tagInput}}" bindinput="onTagInput" bindconfirm="addTag" />
+      <view class="add-tag-btn" bindtap="addTag">添加</view>
+    </view>
+    <view class="tag-list">
+      <view class="tag-item" wx:for="{{form.tags}}" wx:key="*this">
+        {{item}} <text class="tag-del" catchtap="removeTag" data-index="{{index}}">✕</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="form-section card">
+    <text class="section-label">商品图片</text>
+    <view class="img-upload-grid">
+      <view class="upload-thumb" wx:for="{{form.images}}" wx:key="*this">
+        <image class="thumb-img" src="{{item}}" mode="aspectFill"></image>
+        <view class="del-img" catchtap="removeImage" data-index="{{index}}">✕</view>
+      </view>
+      <view class="upload-add" wx:if="{{form.images.length < 9}}" bindtap="addImage">
+        <text class="plus">+</text>
+        <text class="plus-label">上传图片</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="form-section card">
+    <text class="section-label">规格参数</text>
+    <view class="spec-row" wx:for="{{form.specs}}" wx:key="index">
+      <input class="spec-label-input" placeholder="参数名" value="{{item.label}}" bindinput="onSpecInput" data-index="{{index}}" data-field="label" />
+      <input class="spec-value-input" placeholder="参数值" value="{{item.value}}" bindinput="onSpecInput" data-index="{{index}}" data-field="value" />
+      <view class="del-spec" catchtap="removeSpec" data-index="{{index}}">✕</view>
+    </view>
+    <view class="add-spec-btn" bindtap="addSpec">+ 添加规格</view>
+  </view>
+
+  <view class="form-section card">
+    <text class="section-label">商品描述</text>
+    <textarea class="desc-input" placeholder="详细描述商品特点、材质、工艺等..." value="{{form.description}}" bindinput="onInput" data-key="description" maxlength="1000"></textarea>
+    <text class="desc-count">{{form.description.length}}/1000</text>
+  </view>
+
+  <view class="bottom-actions">
+    <view class="save-btn btn-secondary" bindtap="saveDraft">保存草稿</view>
+    <view class="publish-btn btn-primary" bindtap="publishProduct">{{isEdit ? '保存修改' : '发布上架'}}</view>
+  </view>
+  <view class="safe-bottom"></view>
+</view>

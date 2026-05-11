@@ -1,0 +1,107 @@
+<view class="order-detail-page">
+  <!-- 状态 -->
+  <view class="status-banner" style="background: {{statusColor}};">
+    <text class="status-icon-big">{{statusIcon}}</text>
+    <view>
+      <text class="status-text-big">{{order.statusLabel}}</text>
+      <text class="status-sub">{{order.statusDesc}}</text>
+    </view>
+  </view>
+
+  <!-- 物流进度 -->
+  <view class="progress-section card" wx:if="{{!isUser || order.status !== 'pending_pay'}}">
+    <view class="progress-step {{index <= order.currentStep ? 'done' : ''}}" wx:for="{{progressSteps}}" wx:key="key">
+      <view class="step-dot {{index <= order.currentStep ? 'dot-done' : ''}}"></view>
+      <view class="step-info">
+        <text class="step-name">{{item.label}}</text>
+        <text class="step-time" wx:if="{{index <= order.currentStep}}">{{item.time || '--'}}</text>
+      </view>
+      <view class="step-line" wx:if="{{index < progressSteps.length - 1}}"></view>
+    </view>
+  </view>
+
+  <!-- 收货地址 -->
+  <view class="addr-section card">
+    <view class="addr-icon">📍</view>
+    <view class="addr-text">
+      <view class="addr-name-phone">
+        <text class="an">{{order.address.name}}</text>
+        <text class="ap">{{order.address.phone}}</text>
+      </view>
+      <text class="addr-full">{{order.address.full}}</text>
+    </view>
+  </view>
+
+  <!-- 商品清单 -->
+  <view class="goods-section card">
+    <text class="goods-title">商品清单</text>
+    <view class="good-row" wx:for="{{order.goods}}" wx:key="id">
+      <image class="g-img" src="{{item.image}}" mode="aspectFill"></image>
+      <view class="g-info">
+        <text class="g-name">{{item.name}}</text>
+        <text class="g-spec">{{item.spec}}</text>
+        <view class="g-price-row">
+          <text class="g-price">¥{{item.price}}</text>
+          <text class="g-qty">×{{item.quantity}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="price-summary">
+      <view class="ps-row"><text>商品小计</text><text>¥{{order.subtotal}}</text></view>
+      <view class="ps-row"><text>运费</text><text>¥{{order.shipping}}</text></view>
+      <view class="ps-row discount" wx:if="{{order.discount}}"><text>优惠减免</text><text>-¥{{order.discount}}</text></view>
+      <view class="ps-row total-row"><text class="total-l">实付</text><text class="total-r">¥{{order.totalPrice}}</text></view>
+    </view>
+  </view>
+
+  <!-- 定制需求（有则显示） -->
+  <view class="custom-section card" wx:if="{{order.customDesc}}">
+    <text class="cs-title">定制需求</text>
+    <text class="cs-desc">{{order.customDesc}}</text>
+    <view class="cs-images" wx:if="{{order.customImages && order.customImages.length}}">
+      <image class="cs-img" wx:for="{{order.customImages}}" wx:key="*this" src="{{item}}" mode="aspectFill"></image>
+    </view>
+  </view>
+
+  <!-- 订单信息 -->
+  <view class="info-section card">
+    <view class="info-row"><text class="il">订单编号</text><text class="ir">{{order.orderNo}}</text></view>
+    <view class="info-row"><text class="il">下单时间</text><text class="ir">{{order.createTime}}</text></view>
+    <view class="info-row" wx:if="{{order.payTime}}"><text class="il">支付时间</text><text class="ir">{{order.payTime}}</text></view>
+    <view class="info-row" wx:if="{{order.trackingNo}}"><text class="il">快递单号</text><text class="ir copy-text" bindtap="copyTracking">{{order.trackingNo}} 📋</text></view>
+  </view>
+
+  <!-- 操作区（商家） -->
+  <view class="action-section" wx:if="{{!isUser}}">
+    <view class="action-row" wx:if="{{order.status === 'pending_quote'}}">
+      <view class="action-input-wrap">
+        <input class="quote-input" placeholder="输入报价金额 ¥" type="digit" value="{{quotePrice}}" bindinput="onQuoteInput" />
+      </view>
+      <view class="action-btn primary" bindtap="onQuote">确认报价</view>
+    </view>
+    <view class="action-row" wx:if="{{order.status === 'confirmed'}}">
+      <view class="action-btn primary full" bindtap="startProduction">开始制作</view>
+    </view>
+    <view class="action-row" wx:if="{{order.status === 'producing'}}">
+      <view class="action-input-wrap">
+        <input class="quote-input" placeholder="输入快递单号" value="{{trackingNo}}" bindinput="onTrackingInput" />
+      </view>
+      <view class="action-btn primary" bindtap="onShip">确认发货</view>
+    </view>
+    <view class="action-row contact-row">
+      <view class="action-btn secondary" bindtap="contactUser">联系买家</view>
+      <view class="action-btn secondary" wx:if="{{order.status !== 'completed'}}" bindtap="cancelOrder">取消订单</view>
+    </view>
+  </view>
+
+  <!-- 操作区（用户） -->
+  <view class="action-section" wx:if="{{isUser}}">
+    <view class="action-row">
+      <view class="action-btn secondary" bindtap="contactService">联系客服</view>
+      <view class="action-btn primary" wx:if="{{order.status === 'pending_pay'}}" bindtap="onPay">去支付</view>
+      <view class="action-btn primary" wx:if="{{order.status === 'shipping'}}" bindtap="onConfirmReceive">确认收货</view>
+    </view>
+  </view>
+
+  <view class="safe-bottom"></view>
+</view>

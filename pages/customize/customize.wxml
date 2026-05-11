@@ -1,0 +1,113 @@
+<view class="customize-page">
+  <view class="cust-header">
+    <text class="cust-title">有什么想打印的？</text>
+    <text class="cust-subtitle">简单4步，轻松定制专属作品</text>
+  </view>
+
+  <!-- 上传区域 -->
+  <view class="upload-section card" bindtap="onUpload">
+    <view class="upload-area">
+      <view wx:if="{{!uploadedFiles.length}}" class="upload-placeholder">
+        <view class="upload-cloud">
+          <text class="cloud-icon">☁</text>
+          <text class="cloud-plus">+</text>
+        </view>
+        <text class="upload-text">上传图片 / 模型</text>
+        <text class="upload-hint">支持JPG/PNG/STL/OBJ等格式</text>
+        <text class="upload-hint">文件不超过50MB</text>
+      </view>
+      <view wx:else class="uploaded-files">
+        <view class="uploaded-item" wx:for="{{uploadedFiles}}" wx:key="path">
+          <image wx:if="{{item.type === 'image'}}" src="{{item.path}}" class="uploaded-thumb" mode="aspectFill"></image>
+          <view wx:else class="file-thumb">
+            <text class="file-icon">📦</text>
+            <text class="file-name">{{item.name}}</text>
+          </view>
+          <view class="remove-btn" catchtap="removeFile" data-index="{{index}}">✕</view>
+        </view>
+        <view class="add-more-btn" bindtap="onUpload">
+          <text>+</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 四步定制 -->
+  <view class="steps-grid">
+    <view class="step-item card" bindtap="onStepTap" data-step="text">
+      <view class="step-icon-wrap">
+        <text class="step-icon">✏</text>
+      </view>
+      <view class="step-info">
+        <text class="step-name">文字描述</text>
+        <text class="step-desc">告诉我们你的想法</text>
+      </view>
+      <text class="step-arrow">›</text>
+    </view>
+    <view class="step-item card" bindtap="onStepTap" data-step="size">
+      <view class="step-icon-wrap">
+        <text class="step-icon">⬛</text>
+      </view>
+      <view class="step-info">
+        <text class="step-name">尺寸要求</text>
+        <text class="step-desc">提供尺寸信息</text>
+      </view>
+      <text class="step-arrow">›</text>
+    </view>
+    <view class="step-item card" bindtap="onStepTap" data-step="ref">
+      <view class="step-icon-wrap">
+        <text class="step-icon">🖼</text>
+      </view>
+      <view class="step-info">
+        <text class="step-name">参考案例</text>
+        <text class="step-desc">选择相似案例</text>
+      </view>
+      <text class="step-arrow">›</text>
+    </view>
+    <view class="step-item card" bindtap="onStepTap" data-step="service">
+      <view class="step-icon-wrap">
+        <text class="step-icon">🎧</text>
+      </view>
+      <view class="step-info">
+        <text class="step-name">联系客服</text>
+        <text class="step-desc">1对1沟通需求</text>
+      </view>
+      <text class="step-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 文字描述面板 -->
+  <view class="panel card {{activeStep === 'text' ? 'panel-show' : ''}}">
+    <text class="panel-title">文字描述</text>
+    <textarea class="text-input" placeholder="请描述您想要定制的内容，例如：材质、颜色偏好、用途等..." value="{{textDesc}}" bindinput="onTextInput" maxlength="500"></textarea>
+    <text class="text-count">{{textDesc.length}}/500</text>
+  </view>
+
+  <!-- 尺寸要求面板 -->
+  <view class="panel card {{activeStep === 'size' ? 'panel-show' : ''}}">
+    <text class="panel-title">尺寸要求</text>
+    <view class="size-row">
+      <text class="size-label">长（cm）</text>
+      <input class="size-input" type="digit" placeholder="请输入" value="{{sizeL}}" bindinput="onSizeInput" data-key="sizeL" />
+    </view>
+    <view class="size-row">
+      <text class="size-label">宽（cm）</text>
+      <input class="size-input" type="digit" placeholder="请输入" value="{{sizeW}}" bindinput="onSizeInput" data-key="sizeW" />
+    </view>
+    <view class="size-row">
+      <text class="size-label">高（cm）</text>
+      <input class="size-input" type="digit" placeholder="请输入" value="{{sizeH}}" bindinput="onSizeInput" data-key="sizeH" />
+    </view>
+    <view class="size-row">
+      <text class="size-label">备注</text>
+      <input class="size-input" placeholder="其他尺寸说明" value="{{sizeNote}}" bindinput="onSizeInput" data-key="sizeNote" />
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-section">
+    <view class="btn-primary submit-btn" bindtap="onSubmit">提交定制需求</view>
+  </view>
+
+  <view class="safe-bottom"></view>
+</view>

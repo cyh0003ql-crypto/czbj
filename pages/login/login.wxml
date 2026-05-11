@@ -1,0 +1,81 @@
+<view class="login-page">
+  <!-- 背景装饰 -->
+  <view class="bg-circle top-circle"></view>
+  <view class="bg-circle bottom-circle"></view>
+
+  <!-- Logo 区域 -->
+  <view class="brand-area">
+    <view class="brand-icon">✦</view>
+    <text class="brand-name">Artful Living</text>
+    <text class="brand-slogan">让创意触手可及</text>
+  </view>
+
+  <!-- 登录卡片 -->
+  <view class="login-card">
+    <text class="card-title">欢迎登录</text>
+    <text class="card-sub">登录后享受完整购物体验</text>
+
+    <!-- 微信一键登录 -->
+    <button
+      class="wechat-login-btn"
+      open-type="{{canUseGetUserProfile ? 'getUserInfo' : ''}}"
+      bindtap="onWechatLogin"
+    >
+      <text class="wechat-icon">●</text>
+      <text>微信一键登录</text>
+    </button>
+
+    <!-- 手机号登录 -->
+    <view class="phone-login-section {{showPhoneForm ? 'expanded' : ''}}">
+      <view class="phone-toggle" bindtap="togglePhoneForm">
+        <text class="phone-icon">📱</text>
+        <text>手机号登录</text>
+        <text class="toggle-arrow">{{showPhoneForm ? '∧' : '∨'}}</text>
+      </view>
+
+      <view class="phone-form" wx:if="{{showPhoneForm}}">
+        <view class="input-wrap">
+          <text class="input-prefix">+86</text>
+          <input
+            class="phone-input"
+            type="number"
+            placeholder="请输入手机号"
+            placeholder-style="color:#bbb"
+            maxlength="11"
+            value="{{phone}}"
+            bindinput="onPhoneInput"
+          />
+        </view>
+        <view class="sms-row">
+          <input
+            class="sms-input"
+            type="number"
+            placeholder="验证码"
+            placeholder-style="color:#bbb"
+            maxlength="6"
+            value="{{smsCode}}"
+            bindinput="onSmsInput"
+          />
+          <view class="send-sms-btn {{smsSent ? 'sent' : ''}}" bindtap="sendSms">
+            {{smsSent ? countdown + 's后重发' : '获取验证码'}}
+          </view>
+        </view>
+        <view class="phone-submit-btn" bindtap="onPhoneLogin">登录</view>
+      </view>
+    </view>
+
+    <!-- 协议 -->
+    <view class="agreement-row">
+      <view class="agree-check {{agreed ? 'agreed' : ''}}" bindtap="toggleAgree">
+        <text wx:if="{{agreed}}">✓</text>
+      </view>
+      <text class="agree-text">我已阅读并同意</text>
+      <text class="agree-link">《用户协议》</text>
+      <text class="agree-text">和</text>
+      <text class="agree-link">《隐私政策》</text>
+    </view>
+
+    <!-- 游客浏览 -->
+    <view class="guest-btn" bindtap="onGuestBrowse">游客浏览，暂不登录 ›</view>
+  </view>
+</view>

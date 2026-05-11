@@ -1,0 +1,89 @@
+<view class="home-page">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-content">
+      <view class="nav-logo">
+        <text class="nav-brand">Artful Living</text>
+        <text class="nav-slogan">3D打印定制 · 拼豆 · 创意生活小物</text>
+      </view>
+      <view class="nav-icons">
+        <view class="nav-icon" bindtap="onSearch">
+          <text class="iconfont">···</text>
+        </view>
+        <view class="nav-icon" bindtap="onScan">
+          <text class="scan-icon">⊙</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 搜索栏 -->
+  <view class="search-bar" bindtap="onSearch">
+    <text class="search-icon">🔍</text>
+    <text class="search-placeholder">搜索你想要的商品或服务</text>
+  </view>
+
+  <!-- 轮播图 -->
+  <view class="banner-wrap">
+    <swiper class="banner-swiper" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{3000}}" circular="{{true}}" indicator-color="rgba(255,255,255,0.6)" indicator-active-color="#6b4f3a">
+      <swiper-item wx:for="{{banners}}" wx:key="id">
+        <view class="banner-item" style="background: {{item.bg}};">
+          <view class="banner-text">
+            <text class="banner-title">{{item.title}}</text>
+            <text class="banner-desc">{{item.desc}}</text>
+            <view class="banner-btn" bindtap="goCustomize">
+              <text>立即定制 ›</text>
+            </view>
+          </view>
+          <image class="banner-img" src="{{item.img}}" mode="aspectFill"></image>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+
+  <!-- 功能入口 -->
+  <view class="feature-section card">
+    <view class="feature-grid">
+      <view class="feature-item" wx:for="{{features}}" wx:key="id" bindtap="onFeatureTap" data-id="{{item.id}}">
+        <view class="feature-icon-wrap">
+          <text class="feature-icon">{{item.icon}}</text>
+        </view>
+        <text class="feature-name">{{item.name}}</text>
+        <text class="feature-desc">{{item.desc}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 精选推荐 -->
+  <view class="section-header">
+    <text class="section-title">精选推荐</text>
+    <view class="section-more" bindtap="goCategory">
+      <text>更多 ›</text>
+    </view>
+  </view>
+
+  <view class="product-grid">
+    <view class="product-card card" wx:for="{{products}}" wx:key="id" bindtap="goProductDetail" data-id="{{item.id}}">
+      <view class="product-img-wrap">
+        <image class="product-img" src="{{item.image}}" mode="aspectFill" lazy-load="{{true}}"></image>
+        <view class="wishlist-btn" catchtap="onWishlist" data-id="{{item.id}}">
+          <text class="wishlist-icon {{item.wished ? 'wished' : ''}}">♡</text>
+        </view>
+      </view>
+      <view class="product-info">
+        <text class="product-name">{{item.name}}</text>
+        <view class="product-tags">
+          <text class="tag" wx:for="{{item.tags}}" wx:key="*this" wx:for-item="tag">{{tag}}</text>
+        </view>
+        <view class="product-price">
+          <text class="price-unit">¥</text>
+          <text class="price-num">{{item.price}}</text>
+          <text class="price-suffix"> 起</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部安全区 -->
+  <view class="safe-bottom"></view>
+</view>

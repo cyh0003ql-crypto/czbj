@@ -1,0 +1,9 @@
+{
+  "name": "orderManager",
+  "version": "1.0.0",
+  "description": "订单管理云函数 - 增删改查 + 支付/物流预留接口",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

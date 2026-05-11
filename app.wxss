@@ -1,0 +1,135 @@
+/* 全局样式 */
+page {
+  background-color: #f5f0eb;
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: #2c2c2c;
+  box-sizing: border-box;
+}
+
+/* 颜色变量（通过class实现） */
+/* 主色：#6b4f3a 深棕 */
+/* 辅色：#c9a882 浅棕金 */
+/* 背景：#f5f0eb 米白 */
+/* 卡片：#faf8f5 奶白 */
+/* 边框：#e8e0d8 */
+
+.container {
+  padding: 0 0 120rpx;
+}
+
+/* 通用卡片 */
+.card {
+  background: #faf8f5;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 16rpx rgba(107, 79, 58, 0.08);
+  overflow: hidden;
+}
+
+/* 通用按钮 */
+.btn-primary {
+  background: #3d2a1e;
+  color: #fff;
+  border-radius: 48rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  text-align: center;
+  padding: 22rpx 40rpx;
+  border: none;
+}
+
+.btn-secondary {
+  background: #f5f0eb;
+  color: #3d2a1e;
+  border-radius: 48rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  text-align: center;
+  padding: 22rpx 40rpx;
+  border: 1rpx solid #d4c4b0;
+}
+
+/* 标签 */
+.tag {
+  display: inline-block;
+  background: #f0e8de;
+  color: #8b6f5e;
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+  margin-right: 8rpx;
+}
+
+/* 价格 */
+.price {
+  color: #3d2a1e;
+  font-weight: 700;
+}
+
+.price-unit {
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.price-num {
+  font-size: 44rpx;
+}
+
+.price-suffix {
+  font-size: 22rpx;
+  color: #999;
+  font-weight: 400;
+}
+
+/* 分割线 */
+.divider {
+  height: 1rpx;
+  background: #ede6dc;
+  margin: 0 30rpx;
+}
+
+/* 节标题 */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx 30rpx 16rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #2c2c2c;
+}
+
+.section-more {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 0;
+  color: #bbb;
+  font-size: 28rpx;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+/* 加载更多 */
+.load-more {
+  text-align: center;
+  color: #bbb;
+  font-size: 24rpx;
+  padding: 30rpx 0;
+}
+
+/* 底部安全区 */
+.safe-bottom {
+  height: env(safe-area-inset-bottom);
+}

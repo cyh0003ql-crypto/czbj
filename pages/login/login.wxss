@@ -1,0 +1,95 @@
+.login-page {
+  background: #f5f0eb;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60rpx 40rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(201,168,130,0.12);
+}
+.top-circle { width: 500rpx; height: 500rpx; top: -180rpx; right: -120rpx; }
+.bottom-circle { width: 400rpx; height: 400rpx; bottom: -150rpx; left: -100rpx; }
+
+.brand-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 70rpx;
+  gap: 12rpx;
+}
+.brand-icon { font-size: 72rpx; color: #3d2a1e; }
+.brand-name { font-size: 52rpx; font-weight: 800; color: #2c2c2c; letter-spacing: 4rpx; }
+.brand-slogan { font-size: 26rpx; color: #999; }
+
+.login-card {
+  width: 100%;
+  background: #faf8f5;
+  border-radius: 32rpx;
+  padding: 50rpx 40rpx 40rpx;
+  box-shadow: 0 8rpx 40rpx rgba(107,79,58,0.1);
+}
+
+.card-title { display: block; font-size: 38rpx; font-weight: 800; color: #2c2c2c; margin-bottom: 8rpx; }
+.card-sub { display: block; font-size: 24rpx; color: #999; margin-bottom: 50rpx; }
+
+.wechat-login-btn {
+  width: 100%;
+  background: #3d2a1e;
+  color: #fff;
+  border-radius: 48rpx;
+  height: 96rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+  border: none;
+  padding: 0;
+}
+.wechat-icon { font-size: 36rpx; color: #4CAF50; }
+
+.phone-login-section {
+  border: 1rpx solid #ede6dc;
+  border-radius: 20rpx;
+  overflow: hidden;
+  margin-bottom: 24rpx;
+}
+.phone-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 26rpx 24rpx;
+  font-size: 28rpx;
+  color: #3d2a1e;
+}
+.phone-icon { font-size: 32rpx; }
+.toggle-arrow { margin-left: auto; font-size: 24rpx; color: #999; }
+
+.phone-form { padding: 0 24rpx 24rpx; border-top: 1rpx solid #f0ebe4; }
+.input-wrap { display: flex; align-items: center; background: #f5f0eb; border-radius: 12rpx; padding: 20rpx; margin: 20rpx 0 16rpx; gap: 12rpx; }
+.input-prefix { font-size: 26rpx; color: #666; border-right: 1rpx solid #d4c4b0; padding-right: 12rpx; }
+.phone-input { flex: 1; font-size: 28rpx; color: #2c2c2c; }
+.sms-row { display: flex; gap: 16rpx; margin-bottom: 20rpx; }
+.sms-input { flex: 1; background: #f5f0eb; border-radius: 12rpx; padding: 20rpx; font-size: 28rpx; }
+.send-sms-btn { background: #f0e8de; color: #3d2a1e; border-radius: 12rpx; padding: 20rpx 20rpx; font-size: 24rpx; white-space: nowrap; font-weight: 600; }
+.send-sms-btn.sent { color: #bbb; background: #f5f0eb; }
+.phone-submit-btn { background: #6b4f3a; color: #fff; text-align: center; border-radius: 12rpx; padding: 22rpx; font-size: 28rpx; font-weight: 600; }
+
+.agreement-row { display: flex; align-items: center; flex-wrap: wrap; gap: 4rpx; margin-bottom: 30rpx; }
+.agree-check { width: 32rpx; height: 32rpx; border-radius: 6rpx; border: 2rpx solid #d4c4b0; display: flex; align-items: center; justify-content: center; margin-right: 4rpx; }
+.agree-check.agreed { background: #3d2a1e; border-color: #3d2a1e; }
+.agree-check text { font-size: 18rpx; color: #fff; font-weight: 700; }
+.agree-text { font-size: 22rpx; color: #999; }
+.agree-link { font-size: 22rpx; color: #6b4f3a; text-decoration: underline; }
+
+.guest-btn { text-align: center; font-size: 24rpx; color: #bbb; }

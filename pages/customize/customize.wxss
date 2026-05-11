@@ -1,0 +1,281 @@
+.customize-page {
+  background: #f5f0eb;
+  min-height: 100vh;
+  padding: 40rpx 24rpx 0;
+}
+
+.cust-header {
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.cust-title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: 800;
+  color: #2c2c2c;
+  margin-bottom: 12rpx;
+}
+
+.cust-subtitle {
+  display: block;
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 上传区域 */
+.upload-section {
+  margin-bottom: 24rpx;
+  min-height: 280rpx;
+}
+
+.upload-area {
+  min-height: 280rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40rpx;
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.upload-cloud {
+  position: relative;
+  margin-bottom: 16rpx;
+}
+
+.cloud-icon {
+  font-size: 80rpx;
+  color: #c9a882;
+  display: block;
+}
+
+.cloud-plus {
+  position: absolute;
+  top: 16rpx;
+  right: -4rpx;
+  font-size: 32rpx;
+  color: #c9a882;
+  font-weight: 700;
+}
+
+.upload-text {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #3d2a1e;
+  display: block;
+}
+
+.upload-hint {
+  font-size: 22rpx;
+  color: #999;
+  display: block;
+  text-align: center;
+}
+
+/* 上传后 */
+.uploaded-files {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  width: 100%;
+}
+
+.uploaded-item {
+  position: relative;
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.uploaded-thumb {
+  width: 100%;
+  height: 100%;
+  border-radius: 12rpx;
+}
+
+.file-thumb {
+  width: 100%;
+  height: 100%;
+  background: #f0e8de;
+  border-radius: 12rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+}
+
+.file-icon {
+  font-size: 40rpx;
+}
+
+.file-name {
+  font-size: 18rpx;
+  color: #666;
+  padding: 0 8rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  text-align: center;
+}
+
+.remove-btn {
+  position: absolute;
+  top: -12rpx;
+  right: -12rpx;
+  width: 36rpx;
+  height: 36rpx;
+  background: #666;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-more-btn {
+  width: 160rpx;
+  height: 160rpx;
+  background: #f0e8de;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+  color: #c9a882;
+}
+
+/* 四步网格 */
+.steps-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  gap: 20rpx;
+}
+
+.step-icon-wrap {
+  width: 72rpx;
+  height: 72rpx;
+  background: #f0e8de;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-icon {
+  font-size: 32rpx;
+}
+
+.step-info {
+  flex: 1;
+}
+
+.step-name {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #2c2c2c;
+  margin-bottom: 4rpx;
+}
+
+.step-desc {
+  display: block;
+  font-size: 22rpx;
+  color: #999;
+}
+
+.step-arrow {
+  font-size: 36rpx;
+  color: #bbb;
+}
+
+/* 展开面板 */
+.panel {
+  display: none;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.panel-show {
+  display: block;
+}
+
+.panel-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #2c2c2c;
+  margin-bottom: 20rpx;
+}
+
+.text-input {
+  width: 100%;
+  min-height: 180rpx;
+  background: #f5f0eb;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  font-size: 26rpx;
+  color: #2c2c2c;
+}
+
+.text-count {
+  display: block;
+  text-align: right;
+  font-size: 22rpx;
+  color: #bbb;
+  margin-top: 8rpx;
+}
+
+.size-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+  gap: 20rpx;
+}
+
+.size-label {
+  width: 120rpx;
+  font-size: 26rpx;
+  color: #666;
+}
+
+.size-input {
+  flex: 1;
+  background: #f5f0eb;
+  border-radius: 8rpx;
+  padding: 16rpx 20rpx;
+  font-size: 26rpx;
+  color: #2c2c2c;
+}
+
+/* 提交 */
+.submit-section {
+  padding: 20rpx 0 40rpx;
+}
+
+.submit-btn {
+  display: block;
+  text-align: center;
+  line-height: 96rpx;
+  background: #3d2a1e;
+  color: #fff;
+  border-radius: 48rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+}

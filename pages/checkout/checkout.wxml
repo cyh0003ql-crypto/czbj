@@ -1,0 +1,168 @@
+<view class="checkout-page">
+  <!-- 收货地址 -->
+  <view class="section-card addr-card" bindtap="changeAddress">
+    <view wx:if="{{selectedAddress}}" class="addr-content">
+      <view class="addr-icon-wrap">📍</view>
+      <view class="addr-detail">
+        <view class="addr-name-row">
+          <text class="addr-name">{{selectedAddress.name}}</text>
+          <text class="addr-phone">{{selectedAddress.phone}}</text>
+          <view class="default-tag" wx:if="{{selectedAddress.isDefault}}">默认</view>
+        </view>
+        <text class="addr-full">{{selectedAddress.province}}{{selectedAddress.city}}{{selectedAddress.district}}{{selectedAddress.detail}}</text>
+      </view>
+      <text class="addr-arrow">›</text>
+    </view>
+    <view wx:else class="no-addr">
+      <text class="no-addr-icon">📍</text>
+      <text class="no-addr-text">添加收货地址</text>
+      <text class="addr-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 店铺商品 -->
+  <view class="section-card shop-card">
+    <view class="shop-header">
+      <text class="shop-icon">🏪</text>
+      <text class="shop-name">Artful Living</text>
+    </view>
+    <view class="order-items">
+      <view class="order-item" wx:for="{{orderItems}}" wx:key="cartKey">
+        <image class="oi-img" src="{{item.image}}" mode="aspectFill"></image>
+        <view class="oi-info">
+          <text class="oi-name">{{item.name}}</text>
+          <text class="oi-spec">{{item.spec}}</text>
+          <view class="oi-price-row">
+            <text class="oi-price">¥{{item.price}}</text>
+            <text class="oi-qty">×{{item.quantity}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 备注 -->
+    <view class="remark-row">
+      <text class="remark-label">买家留言</text>
+      <input class="remark-input" placeholder="选填，留言给商家" placeholder-style="color:#bbb" value="{{remark}}" bindinput="onRemarkInput" maxlength="100" />
+    </view>
+  </view>
+
+  <!-- 优惠券 -->
+  <view class="section-card coupon-row" bindtap="openCouponPanel">
+    <view class="row-left">
+      <text class="row-icon">🎫</text>
+      <text class="row-label">优惠券</text>
+    </view>
+    <view class="row-right">
+      <text class="coupon-hint {{selectedCoupon ? 'has-coupon' : ''}}">
+        {{selectedCoupon ? '-¥' + selectedCoupon.amount : (availableCoupons.length ? availableCoupons.length + '张可用' : '暂无可用')}}
+      </text>
+      <text class="row-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 配送方式 -->
+  <view class="section-card">
+    <view class="info-row">
+      <view class="row-left"><text class="row-icon">🚚</text><text class="row-label">配送方式</text></view>
+      <text class="row-value">快递配送 · 顺丰/圆通</text>
+    </view>
+    <view class="info-row">
+      <view class="row-left"><text class="row-icon">⏱</text><text class="row-label">预计发货</text></view>
+      <text class="row-value">现货3天内 / 定制3-7天</text>
+    </view>
+  </view>
+
+  <!-- 支付方式 -->
+  <view class="section-card">
+    <view class="pay-method-row">
+      <view class="row-left"><text class="row-icon">💳</text><text class="row-label">支付方式</text></view>
+      <view class="pay-options">
+        <view class="pay-opt {{payMethod === 'wechat' ? 'selected' : ''}}" bindtap="selectPayMethod" data-method="wechat">
+          <text class="pay-opt-icon">●</text> 微信支付
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 价格明细 -->
+  <view class="section-card price-detail-card">
+    <text class="pd-title">价格明细</text>
+    <view class="pd-row"><text class="pd-label">商品合计</text><text class="pd-val">¥{{subtotal}}</text></view>
+    <view class="pd-row"><text class="pd-label">运费</text><text class="pd-val">{{shippingFee === 0 ? '免运费' : '¥' + shippingFee}}</text></view>
+    <view class="pd-row discount-row" wx:if="{{selectedCoupon}}">
+      <text class="pd-label">优惠券</text>
+      <text class="pd-val discount-val">-¥{{selectedCoupon.amount}}</text>
+    </view>
+    <view class="pd-divider"></view>
+    <view class="pd-row total-row">
+      <text class="pd-label-total">实付款</text>
+      <view class="pd-total-price">
+        <text class="pd-unit">¥</text>
+        <text class="pd-total-num">{{finalTotal}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view style="height: 200rpx;"></view>
+
+  <!-- 底部提交栏 -->
+  <view class="submit-bar">
+    <view class="submit-total">
+      <text class="st-label">实付：</text>
+      <text class="st-unit">¥</text>
+      <text class="st-price">{{finalTotal}}</text>
+    </view>
+    <view class="submit-btn {{submitting ? 'submitting' : ''}}" bindtap="onSubmitOrder">
+      {{submitting ? '处理中...' : '提交订单'}}
+    </view>
+  </view>
+
+  <!-- 优惠券选择弹窗 -->
+  <view class="coupon-mask {{showCouponPanel ? 'show' : ''}}" bindtap="closeCouponPanel"></view>
+  <view class="coupon-panel {{showCouponPanel ? 'panel-show' : ''}}">
+    <view class="cp-header">
+      <text class="cp-title">选择优惠券</text>
+      <text class="cp-close" bindtap="closeCouponPanel">✕</text>
+    </view>
+    <view class="cp-no-use" bindtap="selectNoCoupon">
+      <text>不使用优惠券</text>
+      <text class="cp-check" wx:if="{{!selectedCoupon}}">✓</text>
+    </view>
+    <view class="cp-list">
+      <view
+        class="cp-item {{selectedCoupon && selectedCoupon.id === item.id ? 'cp-selected' : ''}} {{item.disabled ? 'cp-disabled' : ''}}"
+        wx:for="{{availableCoupons}}"
+        wx:key="id"
+        bindtap="onSelectCoupon"
+        data-index="{{index}}"
+      >
+        <view class="cp-left">
+          <text class="cp-amount"><text class="cpu">¥</text>{{item.amount}}</text>
+          <text class="cp-min">满{{item.minOrder}}元用</text>
+        </view>
+        <view class="cp-right">
+          <text class="cp-name">{{item.name}}</text>
+          <text class="cp-scope">{{item.scope}}</text>
+          <text class="cp-expire">{{item.expire}}</text>
+        </view>
+        <view class="cp-check-mark" wx:if="{{selectedCoupon && selectedCoupon.id === item.id}}">✓</view>
+      </view>
+    </view>
+    <view class="cp-confirm" bindtap="closeCouponPanel">确认</view>
+    <view style="height: env(safe-area-inset-bottom);"></view>
+  </view>
+
+  <!-- 支付成功弹窗 -->
+  <view class="pay-success-mask" wx:if="{{paySuccess}}">
+    <view class="pay-success-card">
+      <text class="success-icon">✅</text>
+      <text class="success-title">订单提交成功！</text>
+      <text class="success-sub">我们将尽快处理您的订单</text>
+      <view class="success-order-no">订单号：{{orderNo}}</view>
+      <view class="success-btns">
+        <view class="success-btn secondary" bindtap="goOrderList">查看订单</view>
+        <view class="success-btn primary" bindtap="goHome">继续购物</view>
+      </view>
+    </view>
+  </view>
+</view>

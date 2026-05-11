@@ -1,0 +1,55 @@
+<view class="custom-orders-page">
+  <!-- 筛选Tab -->
+  <view class="filter-tabs">
+    <view class="f-tab {{activeTab === item.key ? 'active' : ''}}" wx:for="{{tabs}}" wx:key="key" bindtap="onTabTap" data-key="{{item.key}}">
+      {{item.label}}<text class="f-count" wx:if="{{item.count}}"> {{item.count}}</text>
+    </view>
+  </view>
+
+  <scroll-view scroll-y class="order-scroll" bindscrolltolower="onLoadMore">
+    <view class="custom-card card" wx:for="{{orders}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+      <!-- 卡片头 -->
+      <view class="card-header">
+        <view class="user-info">
+          <image class="user-avatar" src="{{item.userAvatar}}" mode="aspectFill"></image>
+          <view>
+            <text class="user-name">{{item.userName}}</text>
+            <text class="submit-time">{{item.createTime}}</text>
+          </view>
+        </view>
+        <view class="status-badge {{item.statusClass}}">{{item.statusLabel}}</view>
+      </view>
+
+      <!-- 需求描述 -->
+      <view class="card-body">
+        <text class="desc-text">{{item.textDesc || '（无文字描述）'}}</text>
+        <view class="file-thumbs" wx:if="{{item.files && item.files.length}}">
+          <image class="file-thumb-img" wx:for="{{item.files}}" wx:key="*this" wx:for-item="f" src="{{f.path}}" mode="aspectFill"></image>
+          <view class="file-count-badge" wx:if="{{item.files.length > 3}}">+{{item.files.length - 3}}</view>
+        </view>
+        <view class="size-info" wx:if="{{item.size && item.size.l}}">
+          <text class="size-label">尺寸：</text>
+          <text class="size-val">{{item.size.l}}×{{item.size.w}}×{{item.size.h}} cm {{item.size.note}}</text>
+        </view>
+      </view>
+
+      <!-- 卡片底部 -->
+      <view class="card-footer">
+        <view class="quote-display" wx:if="{{item.quote}}">
+          <text class="ql">报价：</text><text class="qv">¥{{item.quote}}</text>
+        </view>
+        <view class="action-btns">
+          <view class="act-btn secondary" catchtap="contactUser" data-id="{{item.id}}">联系买家</view>
+          <view class="act-btn primary" wx:if="{{item.status === 'pending_quote'}}" catchtap="quickQuote" data-id="{{item.id}}">立即报价</view>
+          <view class="act-btn primary" wx:if="{{item.status === 'quoting'}}" catchtap="startProduce" data-id="{{item.id}}">开始制作</view>
+          <view class="act-btn primary" wx:if="{{item.status === 'producing'}}" catchtap="shipOrder" data-id="{{item.id}}">发货</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="load-more">
+      <text wx:if="{{loading}}">加载中...</text>
+      <text wx:elif="{{noMore}}">— 已显示全部 —</text>
+    </view>
+  </scroll-view>
+</view>

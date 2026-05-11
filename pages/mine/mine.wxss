@@ -1,0 +1,197 @@
+.mine-page {
+  background: #f5f0eb;
+  min-height: 100vh;
+  padding: 20rpx 24rpx 40rpx;
+}
+
+/* 用户卡片 */
+.user-card {
+  display: flex;
+  align-items: center;
+  padding: 30rpx 24rpx;
+  margin-bottom: 20rpx;
+  gap: 20rpx;
+}
+
+.avatar-wrap {
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #ddd3c7;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-name {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #2c2c2c;
+  margin-bottom: 6rpx;
+}
+
+.user-role {
+  display: block;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.user-arrow {
+  font-size: 36rpx;
+  color: #bbb;
+}
+
+/* 订单区域 */
+.order-section {
+  margin-bottom: 20rpx;
+  padding: 24rpx;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.order-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #2c2c2c;
+}
+
+.all-orders {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.order-status-grid {
+  display: flex;
+  justify-content: space-around;
+}
+
+.order-status-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10rpx;
+  position: relative;
+}
+
+.order-icon {
+  font-size: 48rpx;
+}
+
+.order-status-label {
+  font-size: 22rpx;
+  color: #666;
+}
+
+.order-badge {
+  position: absolute;
+  top: -8rpx;
+  right: -8rpx;
+  background: #e8624a;
+  color: #fff;
+  font-size: 18rpx;
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 菜单 */
+.menu-section {
+  margin-bottom: 20rpx;
+  overflow: hidden;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx 24rpx;
+}
+
+.menu-left {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.menu-icon {
+  font-size: 36rpx;
+  width: 48rpx;
+  text-align: center;
+}
+
+.menu-label {
+  font-size: 28rpx;
+  color: #2c2c2c;
+}
+
+.menu-right {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.badge-text {
+  font-size: 22rpx;
+  color: #c9a882;
+}
+
+.menu-arrow {
+  font-size: 32rpx;
+  color: #ccc;
+}
+
+.divider {
+  height: 1rpx;
+  background: #f0ebe4;
+  margin: 0 24rpx;
+}
+
+/* 商家入口 */
+.merchant-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28rpx 24rpx;
+  background: linear-gradient(135deg, #f5ede3, #faf8f5);
+}
+
+.merchant-entry-left {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.merchant-icon {
+  font-size: 48rpx;
+}
+
+.merchant-entry-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #3d2a1e;
+  margin-bottom: 4rpx;
+}
+
+.merchant-entry-sub {
+  display: block;
+  font-size: 22rpx;
+  color: #999;
+}

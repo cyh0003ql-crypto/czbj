@@ -1,0 +1,86 @@
+<view class="accounts-page">
+  <!-- 主账号信息 -->
+  <view class="owner-card card">
+    <view class="owner-icon">👑</view>
+    <view class="owner-info">
+      <text class="owner-title">主账号</text>
+      <text class="owner-username">ARTFUL2024（邀请码/用户名）</text>
+      <text class="owner-desc">拥有全部权限，可管理子账号</text>
+    </view>
+    <view class="owner-badge">主账号</view>
+  </view>
+
+  <!-- 子账号列表 -->
+  <view class="section-title-row">
+    <text class="section-title-txt">子账号 ({{subAccounts.length}})</text>
+    <view class="add-sub-btn" bindtap="showAddForm">+ 添加子账号</view>
+  </view>
+
+  <view class="sub-list">
+    <view class="sub-card card" wx:for="{{subAccounts}}" wx:key="id">
+      <view class="sub-header">
+        <view class="sub-avatar">{{item.name.slice(0,1)}}</view>
+        <view class="sub-info">
+          <text class="sub-name">{{item.name}}</text>
+          <text class="sub-username">用户名：{{item.username}}</text>
+        </view>
+        <switch checked="{{item.enabled}}" bindchange="onToggleAccount" data-id="{{item.id}}" color="#3d2a1e" />
+      </view>
+
+      <view class="sub-perms">
+        <view class="perm-tag {{item.permissions.includes(p.key) ? 'perm-on' : 'perm-off'}}" wx:for="{{permOptions}}" wx:key="key" wx:for-item="p">
+          {{p.label}}
+        </view>
+      </view>
+
+      <view class="sub-actions">
+        <view class="sub-btn" bindtap="editAccount" data-id="{{item.id}}">编辑权限</view>
+        <view class="sub-btn danger" bindtap="deleteAccount" data-id="{{item.id}}">删除</view>
+      </view>
+    </view>
+
+    <view class="empty-state" wx:if="{{!subAccounts.length}}">
+      <text class="empty-icon">👤</text>
+      <text>暂无子账号</text>
+      <text class="empty-sub">添加子账号后可授权管理特定功能</text>
+    </view>
+  </view>
+
+  <!-- 添加/编辑子账号弹窗 -->
+  <view class="form-mask" wx:if="{{showForm}}" bindtap="hideForm"></view>
+  <view class="sub-form card {{showForm ? 'form-show' : ''}}">
+    <view class="form-header">
+      <text class="form-title">{{editId ? '编辑子账号' : '添加子账号'}}</text>
+      <text class="form-close" bindtap="hideForm">✕</text>
+    </view>
+    <view class="form-item">
+      <text class="fl">账号名称</text>
+      <input class="fi" placeholder="如：收银员 / 客服01" value="{{form.name}}" bindinput="onFormInput" data-key="name" />
+    </view>
+    <view class="form-item">
+      <text class="fl">用户名</text>
+      <input class="fi" placeholder="用于登录，字母+数字" value="{{form.username}}" bindinput="onFormInput" data-key="username" />
+    </view>
+    <view class="form-item" wx:if="{{!editId}}">
+      <text class="fl">登录密码</text>
+      <input class="fi" placeholder="至少6位" password value="{{form.password}}" bindinput="onFormInput" data-key="password" />
+    </view>
+
+    <text class="perm-section-title">功能权限</text>
+    <view class="perm-toggles">
+      <view class="perm-toggle-row" wx:for="{{permOptions}}" wx:key="key">
+        <view class="perm-toggle-info">
+          <text class="perm-toggle-icon">{{item.icon}}</text>
+          <view>
+            <text class="perm-toggle-label">{{item.label}}</text>
+            <text class="perm-toggle-desc">{{item.desc}}</text>
+          </view>
+        </view>
+        <switch checked="{{form.permissions.includes(item.key)}}" bindchange="onPermToggle" data-key="{{item.key}}" color="#3d2a1e" />
+      </view>
+    </view>
+
+    <view class="form-submit" bindtap="submitForm">{{editId ? '保存修改' : '创建账号'}}</view>
+    <view style="height: env(safe-area-inset-bottom);"></view>
+  </view>
+</view>

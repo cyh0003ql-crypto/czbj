@@ -1,0 +1,157 @@
+<view class="merchant-page">
+  <!-- 顶部操作栏 -->
+  <view class="merchant-nav">
+    <text class="nav-title">商家中心</text>
+    <view class="nav-icons">
+      <text class="nav-btn">⊡</text>
+      <text class="nav-btn">🔔</text>
+    </view>
+  </view>
+
+  <!-- 商家信息 -->
+  <view class="merchant-info card">
+    <view class="merchant-profile">
+      <image class="merchant-avatar" src="https://picsum.photos/100/100?random=80" mode="aspectFill"></image>
+      <view class="merchant-detail">
+        <view class="merchant-name-row">
+          <text class="merchant-name">Artful Living 商家</text>
+          <view class="verified-badge">已认证</view>
+        </view>
+        <text class="merchant-slogan">艺术生活小物定制专家</text>
+      </view>
+      <view class="shop-setting-btn" bindtap="goShopSetting">
+        <text>店铺设置 ›</text>
+      </view>
+    </view>
+
+    <!-- 数据统计 -->
+    <view class="stat-grid">
+      <view class="stat-item" bindtap="goOrderList" data-status="quoting">
+        <text class="stat-num warning">{{stats.quoting}}</text>
+        <text class="stat-label">待报价</text>
+      </view>
+      <view class="stat-item" bindtap="goOrderList" data-status="producing">
+        <text class="stat-num">{{stats.producing}}</text>
+        <text class="stat-label">待生产</text>
+      </view>
+      <view class="stat-item" bindtap="goOrderList" data-status="shipping">
+        <text class="stat-num">{{stats.shipping}}</text>
+        <text class="stat-label">待发货</text>
+      </view>
+      <view class="stat-item" bindtap="goOrderList" data-status="completed">
+        <text class="stat-num">{{stats.completed}}</text>
+        <text class="stat-label">已完成</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 订单流程 -->
+  <view class="order-flow card">
+    <view class="section-top">
+      <text class="section-label">订单流程</text>
+      <view class="view-all" bindtap="goOrderList" data-status="all">查看全部订单 ›</view>
+    </view>
+    <scroll-view class="flow-scroll" scroll-x="{{true}}">
+      <view class="flow-steps">
+        <view class="flow-step" wx:for="{{flowSteps}}" wx:key="key" bindtap="goOrderList" data-status="{{item.key}}">
+          <view class="flow-icon-wrap">
+            <text class="flow-icon">{{item.icon}}</text>
+            <view class="flow-badge" wx:if="{{item.count}}">{{item.count}}</view>
+          </view>
+          <text class="flow-label">{{item.label}}</text>
+          <text class="flow-arrow" wx:if="{{index < flowSteps.length - 1}}">···</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 商品管理 -->
+  <view class="function-section card">
+    <text class="func-title">商品管理</text>
+    <view class="func-grid">
+      <view class="func-item" bindtap="goProductList">
+        <view class="func-icon-wrap">🛍</view>
+        <text class="func-label">商品列表</text>
+      </view>
+      <view class="func-item" bindtap="goProductManage">
+        <view class="func-icon-wrap">📦</view>
+        <text class="func-label">商品管理</text>
+      </view>
+      <view class="func-item" bindtap="goCategoryManage">
+        <view class="func-icon-wrap">⬛</view>
+        <text class="func-label">分类管理</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 订单管理 -->
+  <view class="function-section card">
+    <text class="func-title">订单管理</text>
+    <view class="func-grid">
+      <view class="func-item" bindtap="goOrderList" data-status="all">
+        <view class="func-icon-wrap">📋</view>
+        <text class="func-label">订单列表</text>
+      </view>
+      <view class="func-item" bindtap="goCustomOrders">
+        <view class="func-icon-wrap">💬</view>
+        <text class="func-label">定制需求</text>
+      </view>
+      <view class="func-item" bindtap="goCustomerManage">
+        <view class="func-icon-wrap">👤</view>
+        <text class="func-label">客户管理</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 数据与营销 -->
+  <view class="function-section card">
+    <text class="func-title">数据与营销</text>
+    <view class="func-grid">
+      <view class="func-item" bindtap="goDashboard">
+        <view class="func-icon-wrap">📊</view>
+        <text class="func-label">数据看板</text>
+      </view>
+      <view class="func-item" bindtap="goActivity">
+        <view class="func-icon-wrap">🎁</view>
+        <text class="func-label">活动设置</text>
+      </view>
+      <view class="func-item" bindtap="goCoupon">
+        <view class="func-icon-wrap">🎫</view>
+        <text class="func-label">优惠券</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 数据看板（内嵌） -->
+  <view class="dashboard-section card" wx:if="{{showDashboard}}">
+    <text class="func-title">今日数据概览</text>
+    <view class="dashboard-grid">
+      <view class="dash-item">
+        <text class="dash-num">¥{{dashboard.todaySales}}</text>
+        <text class="dash-label">今日销售额</text>
+      </view>
+      <view class="dash-item">
+        <text class="dash-num">{{dashboard.todayOrders}}</text>
+        <text class="dash-label">今日订单数</text>
+      </view>
+      <view class="dash-item">
+        <text class="dash-num">{{dashboard.todayVisitors}}</text>
+        <text class="dash-label">今日访客数</text>
+      </view>
+      <view class="dash-item">
+        <text class="dash-num">{{dashboard.conversionRate}}%</text>
+        <text class="dash-label">转化率</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 预留接口提示 -->
+  <view class="api-tips card">
+    <text class="tips-title">🔌 已预留接口</text>
+    <text class="tips-item">• 微信支付：orderManager.createPayment()</text>
+    <text class="tips-item">• 物流追踪：orderManager.updateShipping()</text>
+    <text class="tips-item">• 消息推送：订阅消息模板已配置</text>
+  </view>
+
+  <view class="safe-bottom"></view>
+</view>

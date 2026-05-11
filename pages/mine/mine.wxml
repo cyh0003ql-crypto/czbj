@@ -1,0 +1,116 @@
+<view class="mine-page">
+  <!-- 用户信息卡片 -->
+  <view class="user-card card" bindtap="onUserTap">
+    <view class="avatar-wrap">
+      <image class="avatar" src="{{userInfo.avatarUrl || 'https://picsum.photos/100/100?random=99'}}" mode="aspectFill"></image>
+    </view>
+    <view class="user-info">
+      <text class="user-name">{{userInfo.nickName || '点击登录'}}</text>
+      <text class="user-role">{{isMerchant ? '商家账户' : '普通用户'}}</text>
+    </view>
+    <text class="user-arrow">›</text>
+  </view>
+
+  <!-- 我的订单 -->
+  <view class="order-section card">
+    <view class="order-header">
+      <text class="order-title">我的订单</text>
+      <view class="all-orders" bindtap="goOrders">
+        <text>全部订单 ›</text>
+      </view>
+    </view>
+    <view class="order-status-grid">
+      <view class="order-status-item" bindtap="goOrderStatus" data-status="pending_pay">
+        <view class="order-icon">💳</view>
+        <text class="order-status-label">待付款</text>
+        <text class="order-badge" wx:if="{{orderCounts.pendingPay}}">{{orderCounts.pendingPay}}</text>
+      </view>
+      <view class="order-status-item" bindtap="goOrderStatus" data-status="pending_ship">
+        <view class="order-icon">📦</view>
+        <text class="order-status-label">待发货</text>
+        <text class="order-badge" wx:if="{{orderCounts.pendingShip}}">{{orderCounts.pendingShip}}</text>
+      </view>
+      <view class="order-status-item" bindtap="goOrderStatus" data-status="shipped">
+        <view class="order-icon">🚚</view>
+        <text class="order-status-label">待收货</text>
+        <text class="order-badge" wx:if="{{orderCounts.shipped}}">{{orderCounts.shipped}}</text>
+      </view>
+      <view class="order-status-item" bindtap="goOrderStatus" data-status="completed">
+        <view class="order-icon">✅</view>
+        <text class="order-status-label">已完成</text>
+      </view>
+      <view class="order-status-item" bindtap="goOrderStatus" data-status="refund">
+        <view class="order-icon">💰</view>
+        <text class="order-status-label">退款/售后</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 菜单列表 -->
+  <view class="menu-section card">
+    <view class="menu-item" bindtap="goMenuItem" data-path="customize">
+      <view class="menu-left">
+        <text class="menu-icon">📦</text>
+        <text class="menu-label">我的定制</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="divider"></view>
+    <view class="menu-item" bindtap="goMenuItem" data-path="wishlist">
+      <view class="menu-left">
+        <text class="menu-icon">♡</text>
+        <text class="menu-label">我的收藏</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="divider"></view>
+    <view class="menu-item" bindtap="goMenuItem" data-path="address">
+      <view class="menu-left">
+        <text class="menu-icon">📍</text>
+        <text class="menu-label">收货地址</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="divider"></view>
+    <view class="menu-item" bindtap="goMenuItem" data-path="coupon">
+      <view class="menu-left">
+        <text class="menu-icon">🎫</text>
+        <text class="menu-label">优惠券</text>
+      </view>
+      <view class="menu-right">
+        <text class="badge-text" wx:if="{{couponCount}}">{{couponCount}}张</text>
+        <text class="menu-arrow">›</text>
+      </view>
+    </view>
+    <view class="divider"></view>
+    <view class="menu-item" bindtap="contactService">
+      <view class="menu-left">
+        <text class="menu-icon">🎧</text>
+        <text class="menu-label">联系客服</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="divider"></view>
+    <view class="menu-item" bindtap="goMenuItem" data-path="about">
+      <view class="menu-left">
+        <text class="menu-icon">ℹ</text>
+        <text class="menu-label">关于我们</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 商家入口 -->
+  <view class="merchant-entry card" bindtap="goMerchant">
+    <view class="merchant-entry-left">
+      <text class="merchant-icon">🏪</text>
+      <view>
+        <text class="merchant-entry-title">{{isMerchant ? '进入商家中心' : '商家登录'}}</text>
+        <text class="merchant-entry-sub">管理商品 · 处理订单 · 查看数据</text>
+      </view>
+    </view>
+    <text class="menu-arrow">›</text>
+  </view>
+
+  <view class="safe-bottom"></view>
+</view>

@@ -1,0 +1,58 @@
+.coupon-page { background: #f5f0eb; min-height: 100vh; }
+.coupon-tabs { display: flex; background: #faf8f5; border-bottom: 1rpx solid #ede6dc; }
+.c-tab { flex: 1; text-align: center; padding: 24rpx 0; font-size: 26rpx; color: #999; border-bottom: 4rpx solid transparent; }
+.c-tab.active { color: #3d2a1e; font-weight: 700; border-bottom-color: #3d2a1e; }
+
+.coupon-list { padding: 24rpx; display: flex; flex-direction: column; gap: 20rpx; }
+
+.coupon-item {
+  display: flex;
+  background: #faf8f5;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 16rpx rgba(107,79,58,0.08);
+}
+.coupon-item.disabled { opacity: 0.5; }
+
+.coupon-left {
+  width: 200rpx;
+  background: linear-gradient(135deg, #8b6f5e, #6b4f3a);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30rpx 16rpx;
+  gap: 8rpx;
+}
+.coupon-amount { color: #fff; font-size: 64rpx; font-weight: 800; display: block; }
+.amount-unit { font-size: 28rpx; font-weight: 400; }
+.coupon-condition { color: rgba(255,255,255,0.8); font-size: 20rpx; }
+
+.coupon-divider {
+  width: 24rpx;
+  position: relative;
+  background: #faf8f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.dot { width: 24rpx; height: 24rpx; border-radius: 50%; background: #f5f0eb; }
+.dash-line { flex: 1; border-left: 2rpx dashed #e8e0d8; }
+
+.coupon-right {
+  flex: 1;
+  padding: 24rpx 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8rpx;
+}
+.coupon-name { font-size: 28rpx; font-weight: 700; color: #2c2c2c; display: block; }
+.coupon-scope { font-size: 22rpx; color: #999; display: block; }
+.coupon-expire { font-size: 20rpx; color: #bbb; display: block; }
+.use-btn { align-self: flex-end; background: #3d2a1e; color: #fff; font-size: 22rpx; padding: 10rpx 24rpx; border-radius: 24rpx; margin-top: 8rpx; }
+
+.get-coupon-tip { text-align: center; font-size: 24rpx; color: #bbb; padding: 40rpx 0; }
+.empty-state { display: flex; flex-direction: column; align-items: center; padding: 100rpx 0; gap: 20rpx; color: #bbb; font-size: 28rpx; }
+.empty-icon { font-size: 90rpx; }

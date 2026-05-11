@@ -1,0 +1,88 @@
+<view class="cart-page">
+  <!-- 标题栏 -->
+  <view class="cart-header">
+    <text class="cart-title">购物车</text>
+    <view class="edit-btn" bindtap="onEdit">
+      <text>{{isEditing ? '完成' : '编辑'}}</text>
+    </view>
+  </view>
+
+  <!-- 空购物车 -->
+  <view class="empty-state" wx:if="{{!cartItems.length}}">
+    <text class="empty-icon">🛒</text>
+    <text>购物车还是空的</text>
+    <view class="btn-primary go-shop-btn" bindtap="goShopping">去逛逛</view>
+  </view>
+
+  <!-- 购物车列表 -->
+  <view wx:else class="cart-content">
+    <view class="cart-list">
+      <view class="cart-item card" wx:for="{{cartItems}}" wx:key="id">
+        <!-- 选择框 -->
+        <view class="item-check {{item.selected ? 'checked' : ''}}" bindtap="onItemCheck" data-id="{{item.id}}">
+          <text wx:if="{{item.selected}}" class="check-mark">✓</text>
+        </view>
+        <!-- 商品图片 -->
+        <image class="item-img" src="{{item.image}}" mode="aspectFill" bindtap="goProductDetail" data-id="{{item.id}}"></image>
+        <!-- 商品信息 -->
+        <view class="item-info">
+          <text class="item-name">{{item.name}}</text>
+          <text class="item-spec">{{item.spec}}</text>
+          <view class="item-bottom">
+            <view class="item-price">
+              <text class="price-unit">¥</text>
+              <text class="price-main">{{item.price}}</text>
+            </view>
+            <view class="qty-control">
+              <view class="qty-btn" bindtap="onDecrease" data-id="{{item.id}}">−</view>
+              <text class="qty-num">{{item.quantity}}</text>
+              <view class="qty-btn" bindtap="onIncrease" data-id="{{item.id}}">+</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 推荐商品 -->
+    <view class="section-header">
+      <text class="section-title">为你推荐</text>
+      <text class="section-more">更多 ›</text>
+    </view>
+
+    <view class="recommend-grid">
+      <view class="recommend-item card" wx:for="{{recommendProducts}}" wx:key="id" bindtap="goProductDetail" data-id="{{item.id}}">
+        <view class="rec-img-wrap">
+          <image class="rec-img" src="{{item.image}}" mode="aspectFill" lazy-load="{{true}}"></image>
+          <view class="rec-wishlist">♡</view>
+        </view>
+        <text class="rec-name">{{item.name}}</text>
+        <text class="rec-spec">{{item.spec}}</text>
+        <view class="rec-bottom">
+          <view class="rec-price">
+            <text class="price-unit">¥</text>
+            <text class="rec-price-num">{{item.price}}</text>
+          </view>
+          <view class="rec-cart-btn" catchtap="addRecommendToCart" data-id="{{item.id}}">🛒</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部结算栏 -->
+  <view class="checkout-bar" wx:if="{{cartItems.length}}">
+    <view class="select-all {{allSelected ? 'checked' : ''}}" bindtap="onSelectAll">
+      <text class="check-mark" wx:if="{{allSelected}}">✓</text>
+    </view>
+    <text class="select-all-text" bindtap="onSelectAll">全选</text>
+    <view class="total-section">
+      <text class="total-label">合计：</text>
+      <text class="price-unit">¥</text>
+      <text class="total-price">{{totalPrice}}</text>
+    </view>
+    <view class="checkout-btn {{selectedCount ? '' : 'disabled'}}" bindtap="onCheckout">
+      <text>去结算{{selectedCount ? '(' + selectedCount + ')' : ''}}</text>
+    </view>
+  </view>
+
+  <view class="safe-bottom"></view>
+</view>

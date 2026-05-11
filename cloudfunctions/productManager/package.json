@@ -1,0 +1,9 @@
+{
+  "name": "productManager",
+  "version": "1.0.0",
+  "description": "商品管理云函数 - 增删改查 + 搜索",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}
