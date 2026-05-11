@@ -1,4 +1,5 @@
 <view class="mine-page">
+
   <!-- 用户信息卡片 -->
   <view class="user-card card" bindtap="onUserTap">
     <view class="avatar-wrap">
@@ -21,26 +22,36 @@
     </view>
     <view class="order-status-grid">
       <view class="order-status-item" bindtap="goOrderStatus" data-status="pending_pay">
-        <view class="order-icon">💳</view>
+        <view class="order-icon">
+          <text class="order-icon-txt">💳</text>
+        </view>
         <text class="order-status-label">待付款</text>
         <text class="order-badge" wx:if="{{orderCounts.pendingPay}}">{{orderCounts.pendingPay}}</text>
       </view>
       <view class="order-status-item" bindtap="goOrderStatus" data-status="pending_ship">
-        <view class="order-icon">📦</view>
+        <view class="order-icon">
+          <text class="order-icon-txt">📦</text>
+        </view>
         <text class="order-status-label">待发货</text>
         <text class="order-badge" wx:if="{{orderCounts.pendingShip}}">{{orderCounts.pendingShip}}</text>
       </view>
       <view class="order-status-item" bindtap="goOrderStatus" data-status="shipped">
-        <view class="order-icon">🚚</view>
+        <view class="order-icon">
+          <text class="order-icon-txt">🚚</text>
+        </view>
         <text class="order-status-label">待收货</text>
         <text class="order-badge" wx:if="{{orderCounts.shipped}}">{{orderCounts.shipped}}</text>
       </view>
       <view class="order-status-item" bindtap="goOrderStatus" data-status="completed">
-        <view class="order-icon">✅</view>
+        <view class="order-icon">
+          <text class="order-icon-txt">✅</text>
+        </view>
         <text class="order-status-label">已完成</text>
       </view>
       <view class="order-status-item" bindtap="goOrderStatus" data-status="refund">
-        <view class="order-icon">💰</view>
+        <view class="order-icon">
+          <text class="order-icon-txt">💰</text>
+        </view>
         <text class="order-status-label">退款/售后</text>
       </view>
     </view>
@@ -50,7 +61,7 @@
   <view class="menu-section card">
     <view class="menu-item" bindtap="goMenuItem" data-path="customize">
       <view class="menu-left">
-        <text class="menu-icon">📦</text>
+        <text class="menu-icon-txt">📦</text>
         <text class="menu-label">我的定制</text>
       </view>
       <text class="menu-arrow">›</text>
@@ -58,7 +69,7 @@
     <view class="divider"></view>
     <view class="menu-item" bindtap="goMenuItem" data-path="wishlist">
       <view class="menu-left">
-        <text class="menu-icon">♡</text>
+        <text class="menu-icon-txt">♡</text>
         <text class="menu-label">我的收藏</text>
       </view>
       <text class="menu-arrow">›</text>
@@ -66,7 +77,7 @@
     <view class="divider"></view>
     <view class="menu-item" bindtap="goMenuItem" data-path="address">
       <view class="menu-left">
-        <text class="menu-icon">📍</text>
+        <text class="menu-icon-txt">📍</text>
         <text class="menu-label">收货地址</text>
       </view>
       <text class="menu-arrow">›</text>
@@ -74,7 +85,7 @@
     <view class="divider"></view>
     <view class="menu-item" bindtap="goMenuItem" data-path="coupon">
       <view class="menu-left">
-        <text class="menu-icon">🎫</text>
+        <text class="menu-icon-txt">🎫</text>
         <text class="menu-label">优惠券</text>
       </view>
       <view class="menu-right">
@@ -85,7 +96,7 @@
     <view class="divider"></view>
     <view class="menu-item" bindtap="contactService">
       <view class="menu-left">
-        <text class="menu-icon">🎧</text>
+        <text class="menu-icon-txt">🎧</text>
         <text class="menu-label">联系客服</text>
       </view>
       <text class="menu-arrow">›</text>
@@ -93,7 +104,7 @@
     <view class="divider"></view>
     <view class="menu-item" bindtap="goMenuItem" data-path="about">
       <view class="menu-left">
-        <text class="menu-icon">ℹ</text>
+        <text class="menu-icon-txt">ℹ</text>
         <text class="menu-label">关于我们</text>
       </view>
       <text class="menu-arrow">›</text>
@@ -103,8 +114,8 @@
   <!-- 商家入口 -->
   <view class="merchant-entry card" bindtap="goMerchant">
     <view class="merchant-entry-left">
-      <text class="merchant-icon">🏪</text>
-      <view>
+      <text class="merchant-icon-txt">🏪</text>
+      <view class="merchant-entry-texts">
         <text class="merchant-entry-title">{{isMerchant ? '进入商家中心' : '商家登录'}}</text>
         <text class="merchant-entry-sub">管理商品 · 处理订单 · 查看数据</text>
       </view>
@@ -113,4 +124,5 @@
   </view>
 
   <view class="safe-bottom"></view>
+
 </view>

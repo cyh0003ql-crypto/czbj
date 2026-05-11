@@ -12,9 +12,12 @@
     "pages/address/address",
     "pages/wishlist/wishlist",
     "pages/coupon/coupon",
+    "pages/checkout/checkout",
+    "pages/login/login",
     "pages/merchant/productEdit/productEdit",
     "pages/merchant/orderDetail/orderDetail",
-    "pages/merchant/customOrders/customOrders"
+    "pages/merchant/customOrders/customOrders",
+    "pages/merchant/accounts/accounts"
   ],
   "window": {
     "backgroundTextStyle": "light",

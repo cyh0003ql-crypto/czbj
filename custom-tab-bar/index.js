@@ -22,22 +22,32 @@ Component({
   pageLifetimes: {
     show() {
       this.updateCartCount();
-      const pages = getCurrentPages();
-      const currentPage = pages[pages.length - 1];
-      const route = '/' + currentPage.route;
-      const list = this.data.list;
-      const index = list.findIndex(item => item.pagePath === route);
-      if (index !== -1) {
-        this.setData({ selected: index });
+      try {
+        const pages = getCurrentPages();
+        if (!pages || !pages.length) return;
+        const currentPage = pages[pages.length - 1];
+        if (!currentPage || !currentPage.route) return;
+        const route = '/' + currentPage.route;
+        const list = this.data.list;
+        const index = list.findIndex(item => item.pagePath === route);
+        if (index !== -1) {
+          this.setData({ selected: index });
+        }
+      } catch (e) {
+        // ignore route detection errors on startup
       }
     }
   },
 
   methods: {
     updateCartCount() {
-      const cart = wx.getStorageSync('cart') || [];
-      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-      this.setData({ cartCount: count });
+      try {
+        const cart = wx.getStorageSync('cart') || [];
+        const count = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
+        this.setData({ cartCount: count });
+      } catch (e) {
+        this.setData({ cartCount: 0 });
+      }
     },
 
     switchTab(e) {

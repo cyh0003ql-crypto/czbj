@@ -88,6 +88,14 @@
 }
 
 .order-icon {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-icon-txt {
   font-size: 48rpx;
 }
 
@@ -131,6 +139,12 @@
 }
 
 .menu-icon {
+  font-size: 36rpx;
+  width: 48rpx;
+  text-align: center;
+}
+
+.menu-icon-txt {
   font-size: 36rpx;
   width: 48rpx;
   text-align: center;
@@ -180,6 +194,15 @@
 
 .merchant-icon {
   font-size: 48rpx;
+}
+
+.merchant-icon-txt {
+  font-size: 48rpx;
+}
+
+.merchant-entry-texts {
+  display: flex;
+  flex-direction: column;
 }
 
 .merchant-entry-title {
